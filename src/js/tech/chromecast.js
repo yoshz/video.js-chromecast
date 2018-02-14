@@ -84,7 +84,7 @@ class Chromecast extends Tech {
     }
 
     createEl () {
-        let el = videojs.createEl('div', {
+        let el = videojs.dom.createEl('div', {
             id: this.options_.techId,
             className: 'vjs-tech vjs-tech-chromecast'
         });
@@ -319,6 +319,10 @@ class Chromecast extends Tech {
     dispose () {
         this.resetSrc_(Function.prototype);
         super.dispose(this);
+    }
+
+    readyState () {
+       return this.isReady_;
     }
 
 }

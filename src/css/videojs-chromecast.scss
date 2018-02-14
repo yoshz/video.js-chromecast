@@ -58,7 +58,8 @@ $icons: (
   @extend .vjs-icon-chromecast;
 
   &:before {
-    line-height: 2.3;
+    font-size: 1.8em;
+    line-height: 1.67;
   }
 
   &.connected {

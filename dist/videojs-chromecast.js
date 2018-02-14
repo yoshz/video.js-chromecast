@@ -226,16 +226,10 @@ var ChromeCastButton = (function (_Button) {
                     tracks.push(track);
                 }
                 mediaInfo.textTrackStyle = new chrome.cast.media.TextTrackStyle();
-                
-                // Update the font to a more generic ux ( Used netflix as example )
-                mediaInfo.textTrackStyle                    = new chrome.cast.media.TextTrackStyle();
-                mediaInfo.textTrackStyle.fontFamily         = 'Arial'
-                mediaInfo.textTrackStyle.foregroundColor    = '#FFFFFF';
-                mediaInfo.textTrackStyle.backgroundColor    = '#00000000';
-                mediaInfo.textTrackStyle.fontScale          = '1.1'
-                mediaInfo.textTrackStyle.edgeColor          = '#00000099'
-                mediaInfo.textTrackStyle.edgeType           = chrome.cast.media.TextTrackEdgeType.DROP_SHADOW;
-                
+                mediaInfo.textTrackStyle.foregroundColor = '#FFFFFF';
+                mediaInfo.textTrackStyle.backgroundColor = '#00000060';
+                mediaInfo.textTrackStyle.edgeType = chrome.cast.media.TextTrackEdgeType.DROP_SHADOW;
+                mediaInfo.textTrackStyle.windowType = chrome.cast.media.TextTrackWindowType.ROUNDED_CORNERS;
             }
             // Load/Add audio tracks
 
@@ -267,15 +261,6 @@ var ChromeCastButton = (function (_Button) {
             loadRequest.autoplay = true;
             loadRequest.currentTime = this.player_.currentTime();
 
-            // Set active track by selected subtitle
-            var activeTrack = 0
-            document.querySelectorAll('.vjs-menu-content > .vjs-captions-menu-item').forEach(function(el, i) {
-                if (el.classList.contains('vjs-selected')) {
-                    activeTrack = (i + 1)
-                }
-            })
-            loadRequest.activeTrackIds = [activeTrack];
-            
             this.apiSession.loadMedia(loadRequest, this.onMediaDiscovered.bind(this), this.castError.bind(this));
             this.apiSession.addUpdateListener(this.onSessionUpdate.bind(this));
         }
@@ -762,6 +747,11 @@ var Chromecast = (function (_Tech) {
         value: function dispose() {
             this.resetSrc_(Function.prototype);
             _get(Object.getPrototypeOf(Chromecast.prototype), 'dispose', this).call(this, this);
+        }
+    }, {
+        key: 'readyState',
+        value: function readyState() {
+            return this.isReady_;
         }
     }]);
 

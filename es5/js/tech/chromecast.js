@@ -113,7 +113,7 @@ var Chromecast = (function (_Tech) {
     _createClass(Chromecast, [{
         key: 'createEl',
         value: function createEl() {
-            var el = _videoJs2['default'].createEl('div', {
+            var el = _videoJs2['default'].dom.createEl('div', {
                 id: this.options_.techId,
                 className: 'vjs-tech vjs-tech-chromecast'
             });
@@ -376,6 +376,11 @@ var Chromecast = (function (_Tech) {
         value: function dispose() {
             this.resetSrc_(Function.prototype);
             _get(Object.getPrototypeOf(Chromecast.prototype), 'dispose', this).call(this, this);
+        }
+    }, {
+        key: 'readyState',
+        value: function readyState() {
+            return this.isReady_;
         }
     }]);
 
